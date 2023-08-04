@@ -1,0 +1,30 @@
+version: '3.0'
+services:
+
+  postgres:
+    container_name: postgres.transaction.dev
+    image: postgres:latest
+    enviroment:
+      POSTGRES_DB: $DATABASE_NAME
+      POSTGRES_USER: $DABATASE_USERNAME
+      POSTGRES_PASSWORD: $DATABASE_PASSWORD
+      PGDATA: /data/postgres
+    volumes:
+      - postgres_data:/data/postgres
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+
+  flyway:
+    image: flyway/flyway:9.16-alpine
+    entrypoint:
+      - sh
+      - -c
+      - flyway -url=jdbc:postgresql://postgres:${DATABASE_PORT}/${DATABASE_NAME} -user=${DATABASE_USERNAME} -password=${DATABASE_PASSWORD} -schemas=${DATABASE_SCHEMA} -locations=filesystem:migrations migrate
+    depends_on:
+      - postgres
+    volumes:
+      - ./migrations:/flyway/migrations
+
+  volumes:
+    postgres_data:
