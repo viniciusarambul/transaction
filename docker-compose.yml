@@ -1,12 +1,21 @@
-version: '3.0'
+version: '3.5'
+
 services:
+  app:
+    build: .
+    volumes:
+      - .:go/src/
+    ports:
+      - "80:8080"
+    links:
+      - postgres
 
   postgres:
     container_name: postgres.transaction.dev
     image: postgres:latest
-    enviroment:
+    environment:
       POSTGRES_DB: $DATABASE_NAME
-      POSTGRES_USER: $DABATASE_USERNAME
+      POSTGRES_USER: $DATABASE_USERNAME
       POSTGRES_PASSWORD: $DATABASE_PASSWORD
       PGDATA: /data/postgres
     volumes:
@@ -26,5 +35,5 @@ services:
     volumes:
       - ./migrations:/flyway/migrations
 
-  volumes:
-    postgres_data:
+volumes:
+  postgres_data:
