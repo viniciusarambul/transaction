@@ -1,25 +1,42 @@
 package entity
 
 import (
-	"github.com/google/uuid"
+	"github.com/gin-gonic/gin"
 	"github.com/shopspring/decimal"
 )
 
 type (
 	Account struct {
-		ID        uuid.UUID
-		AccountId int
-		Document  string
-		Limit     decimal.Decimal
+		ID       int
+		Document string
+		LimitMax decimal.Decimal
 	}
+
 	AccountInput struct {
-		AccountId int             `json:"account_id"`
-		Document  string          `json:"document"`
-		Limit     decimal.Decimal `json:"limit"`
+		Document string `json:"document"`
 	}
+
 	AccountOutput struct {
-		AccountId int             `json:"account_id"`
-		Document  string          `json:"document"`
-		Limit     decimal.Decimal `json:"limit"`
+		ID       int             `json:"id"`
+		Document string          `json:"document"`
+		LimitMax decimal.Decimal `json:"limit"`
+	}
+
+	AccountRepository interface {
+		Find(id int) (Account, error)
+		Create(account *Account) error
+	}
+
+	AccountPresenter interface {
+		Output(account Account) AccountOutput
+	}
+
+	AccountUseCase interface {
+		Create(accountInput AccountInput) (Account, error)
+		Find(id int) (AccountOutput, error)
+	}
+
+	AccountHandler interface {
+		Create(context *gin.Context)
 	}
 )
