@@ -18,7 +18,6 @@ func NewAccountUseCase(repository entity.AccountRepository, presenter entity.Acc
 
 func (accountUseCase *AccountUseCase) Create(accountInput entity.AccountInput) (entity.Account, error) {
 	account := entity.Account{
-
 		Document: accountInput.Document,
 	}
 
