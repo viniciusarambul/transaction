@@ -32,5 +32,11 @@ func main() {
 
 	handler.NewAccountHandler(engine, accountUseCase)
 
+	transactionRepository := repository.NewTransactionRepository(db)
+	operationRepository := repository.NewOperationRepository(db)
+	transactionUseCase := usecase.NewTransactionUseCase(transactionRepository, operationRepository)
+
+	handler.NewTransactionHandler(engine, transactionUseCase)
+
 	engine.Run()
 }

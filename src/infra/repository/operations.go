@@ -13,8 +13,8 @@ func NewOperationRepository(DB *gorm.DB) entity.OperationRepository {
 	return &OperationRepository{DB}
 }
 
-func (o *OperationRepository) FindByOperationType(id int) (entity.Operation, error) {
-	var operation entity.Operation
+func (o *OperationRepository) FindByOperationType(id int) (entity.OperationsTypes, error) {
+	var operation entity.OperationsTypes
 
 	err := o.DB.Where("operation_type_id = ?", id).Find(&operation)
 

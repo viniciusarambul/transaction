@@ -19,14 +19,16 @@ func NewTransactionHandler(engine *gin.Engine, TransactionUseCase entity.Transac
 }
 
 func (transactionHandler TransactionHandler) Create(context *gin.Context) {
-	var transactionInput entity.TransactionInput
+	var transactionInput *entity.TransactionInput
 	err := context.ShouldBindJSON(&transactionInput)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	transaction, err := transactionHandler.TransactionUseCase.Create(transactionInput)
+	idempotency := context.GetHeader("key")
+
+	transaction, err := transactionHandler.TransactionUseCase.Create(transactionInput, idempotency)
 
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

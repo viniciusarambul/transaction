@@ -13,7 +13,7 @@ func NewTransactionRepository(DB *gorm.DB) entity.TransactionRepository {
 	return &TransactionRepository{DB}
 }
 
-func (t *TransactionRepository) Create(transaction entity.Transaction) error {
+func (t *TransactionRepository) Create(transaction *entity.Transaction) error {
 
 	err := t.DB.Create(&transaction)
 

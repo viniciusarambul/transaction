@@ -4,14 +4,13 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
 	"github.com/shopspring/decimal"
 )
 
 type (
 	Transaction struct {
 		ID              int
-		IdempotencyKey  uuid.UUID
+		IdempotencyKey  string
 		AccountId       int
 		OperationTypeId int
 		Amount          decimal.Decimal
@@ -25,12 +24,12 @@ type (
 	}
 
 	TransactionRepository interface {
-		Create(transaction Transaction) error
+		Create(transaction *Transaction) error
 		SumTotalBalance(accountId int) (Transaction, error)
 	}
 
 	TransactionUseCase interface {
-		Create(transactionInput TransactionInput) (Transaction, error)
+		Create(transactionInput *TransactionInput, idempotency string) (Transaction, error)
 	}
 
 	TransactionHandler interface {
