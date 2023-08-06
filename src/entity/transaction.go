@@ -3,6 +3,7 @@ package entity
 import (
 	"time"
 
+	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/shopspring/decimal"
 )
@@ -28,9 +29,11 @@ type (
 		SumTotalBalance(accountId int) (Transaction, error)
 	}
 
-	TransactionHandler interface {
+	TransactionUseCase interface {
+		Create(transactionInput TransactionInput) (Transaction, error)
 	}
 
-	TransactionUseCase interface {
+	TransactionHandler interface {
+		Create(context *gin.Context)
 	}
 )
