@@ -14,6 +14,7 @@ type Environments struct {
 	DatabasePassword string
 	DatabaseHost     string
 	DatabasePort     string
+	LogLevel         string
 }
 
 func LoadEnvVars() *Environments {
@@ -33,5 +34,6 @@ func LoadEnvVars() *Environments {
 		DatabasePassword: viper.GetString("DATABASE_PASSWORD"),
 		DatabaseHost:     viper.GetString("DATABASE_HOST"),
 		DatabasePort:     viper.GetString("DATABASE_PORT"),
+		LogLevel:         viper.GetString("LOG_LEVEL"),
 	}
 }

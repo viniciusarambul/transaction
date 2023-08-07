@@ -20,21 +20,28 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"ping": "pong"})
 	})
 
+	log, err := infra.InitLogger()
+	if err != nil {
+		fmt.Println(err)
+	}
+
 	db, err := infra.SetupDB()
 	if err != nil {
 		fmt.Println(err)
 		panic("errou")
 	}
 
+	log.Info("Init database successful")
+
 	accountRepository := repository.NewAccountRepository(db)
 	accountPresenter := presenter.NewAccountPresenter()
-	accountUseCase := usecase.NewAccountUseCase(accountRepository, accountPresenter)
+	accountUseCase := usecase.NewAccountUseCase(accountRepository, accountPresenter, log)
 
 	handler.NewAccountHandler(engine, accountUseCase)
 
 	transactionRepository := repository.NewTransactionRepository(db)
 	operationRepository := repository.NewOperationRepository(db)
-	transactionUseCase := usecase.NewTransactionUseCase(transactionRepository, operationRepository, accountRepository)
+	transactionUseCase := usecase.NewTransactionUseCase(transactionRepository, operationRepository, accountRepository, log)
 
 	handler.NewTransactionHandler(engine, transactionUseCase)
 
