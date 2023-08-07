@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"github.com/sirupsen/logrus"
+	"github.com/uptrace/opentelemetry-go-extra/otellogrus"
 )
 
 func InitLogger() (*logrus.Logger, error) {
@@ -18,6 +19,14 @@ func InitLogger() (*logrus.Logger, error) {
 	}
 
 	log.SetLevel(level)
+
+	// Instrument logrus.
+	log.AddHook(otellogrus.NewHook(otellogrus.WithLevels(
+		logrus.PanicLevel,
+		logrus.FatalLevel,
+		logrus.ErrorLevel,
+		logrus.WarnLevel,
+	)))
 
 	return log, nil
 }
