@@ -2,7 +2,7 @@ include .env
 export
 
 build:
-	@go build -tags $(GO_TAGS) -o ./bin/ms-transaction ./cmd/transaction
+	@go build -tags $(run_cmd) -o ./bin/ms-transaction src/api/
 
 infra.up:
 	@docker-compose up -d --remove-orphans postgres
