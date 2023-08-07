@@ -34,7 +34,7 @@ func main() {
 
 	transactionRepository := repository.NewTransactionRepository(db)
 	operationRepository := repository.NewOperationRepository(db)
-	transactionUseCase := usecase.NewTransactionUseCase(transactionRepository, operationRepository)
+	transactionUseCase := usecase.NewTransactionUseCase(transactionRepository, operationRepository, accountRepository)
 
 	handler.NewTransactionHandler(engine, transactionUseCase)
 
