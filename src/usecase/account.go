@@ -1,6 +1,9 @@
 package usecase
 
 import (
+	"errors"
+
+	"github.com/shopspring/decimal"
 	"github.com/sirupsen/logrus"
 	"github.com/viniciusarambul/transaction/src/entity"
 )
@@ -25,6 +28,10 @@ func (accountUseCase *AccountUseCase) Create(accountInput entity.AccountInput) (
 	account := entity.Account{
 		Document: accountInput.Document,
 		LimitMax: accountInput.LimitMax,
+	}
+
+	if account.LimitMax.LessThan(decimal.Zero) {
+		return entity.Account{}, errors.New("Limit não pode ser negativo")
 	}
 
 	err := accountUseCase.accountRepository.Create(&account)
