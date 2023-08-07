@@ -3,6 +3,7 @@ package entity
 import (
 	"fmt"
 	"regexp"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/shopspring/decimal"
@@ -10,14 +11,18 @@ import (
 
 type (
 	Account struct {
-		ID       int
-		Document string
-		LimitMax decimal.Decimal
+		ID        int
+		Document  string
+		LimitMax  decimal.Decimal
+		CreatedAt time.Time
+		UpdatedAt time.Time
 	}
 
 	AccountInput struct {
-		Document string          `json:"document"`
-		LimitMax decimal.Decimal `json:"limit_max"`
+		Document  string          `json:"document"`
+		LimitMax  decimal.Decimal `json:"limit_max"`
+		CreateAt  time.Time       `json:"created_at"`
+		UpdatedAt time.Time       `json:"updated_at"`
 	}
 
 	AccountOutput struct {
