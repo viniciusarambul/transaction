@@ -1,6 +1,9 @@
 package entity
 
 import (
+	"fmt"
+	"regexp"
+
 	"github.com/gin-gonic/gin"
 	"github.com/shopspring/decimal"
 )
@@ -13,13 +16,14 @@ type (
 	}
 
 	AccountInput struct {
-		Document string `json:"document"`
+		Document string          `json:"document"`
+		LimitMax decimal.Decimal `json:"limit_max"`
 	}
 
 	AccountOutput struct {
 		ID       int             `json:"id"`
 		Document string          `json:"document"`
-		LimitMax decimal.Decimal `json:"limit"`
+		LimitMax decimal.Decimal `json:"limit_max"`
 	}
 
 	AccountRepository interface {
@@ -40,3 +44,10 @@ type (
 		Create(context *gin.Context)
 	}
 )
+
+func RemoveLGPDFromResponse(document string) string {
+	documentRegex := regexp.MustCompile(document)
+	maskedDocument := documentRegex.ReplaceAllString(document, fmt.Sprintf("%s******-%s", document[0:3], document[len(document)-2:]))
+
+	return maskedDocument
+}

@@ -26,9 +26,7 @@ func (transactionHandler TransactionHandler) Create(context *gin.Context) {
 		return
 	}
 
-	idempotency := context.GetHeader("key")
-
-	transaction, err := transactionHandler.TransactionUseCase.Create(transactionInput, idempotency)
+	transaction, err := transactionHandler.TransactionUseCase.Create(transactionInput)
 
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

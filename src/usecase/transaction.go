@@ -22,9 +22,9 @@ func NewTransactionUseCase(transactionRepository entity.TransactionRepository, o
 	}
 }
 
-func (transactionUseCase *TransactionUseCase) Create(transactionInput *entity.TransactionInput, idempotency string) (entity.Transaction, error) {
+func (transactionUseCase *TransactionUseCase) Create(transactionInput *entity.TransactionInput) (entity.Transaction, error) {
 	transactionBeforeVerify := entity.Transaction{
-		IdempotencyKey:  idempotency,
+		IdempotencyKey:  transactionInput.IdempotencyKey,
 		AccountId:       transactionInput.AccountId,
 		OperationTypeId: transactionInput.OperationTypeId,
 		Amount:          transactionInput.Amount,

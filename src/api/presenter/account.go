@@ -9,8 +9,11 @@ func NewAccountPresenter() entity.AccountPresenter {
 }
 
 func (accountPresenter accountPresenter) Output(account entity.Account) entity.AccountOutput {
+	doc := entity.RemoveLGPDFromResponse(account.Document)
+
 	return entity.AccountOutput{
-		Document: account.Document,
+		ID:       account.ID,
+		Document: doc,
 		LimitMax: account.LimitMax,
 	}
 }

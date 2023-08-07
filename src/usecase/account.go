@@ -19,6 +19,7 @@ func NewAccountUseCase(repository entity.AccountRepository, presenter entity.Acc
 func (accountUseCase *AccountUseCase) Create(accountInput entity.AccountInput) (entity.Account, error) {
 	account := entity.Account{
 		Document: accountInput.Document,
+		LimitMax: accountInput.LimitMax,
 	}
 
 	err := accountUseCase.accountRepository.Create(&account)
@@ -37,10 +38,7 @@ func (accountUseCase *AccountUseCase) Find(id int) (entity.AccountOutput, error)
 		return entity.AccountOutput{}, err
 	}
 
-	accountOutput := entity.AccountOutput{
-		ID:       account.ID,
-		Document: account.Document,
-	}
+	accountOutput := accountUseCase.accountPresenter.Output(account)
 
 	return accountOutput, nil
 }

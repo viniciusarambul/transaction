@@ -21,6 +21,7 @@ type (
 		AccountId       int             `json:"account_id"`
 		OperationTypeId int             `json:"operation_type_id"`
 		Amount          decimal.Decimal `json:"amount"`
+		IdempotencyKey  string          `json:"idempotency_key"`
 	}
 
 	TransactionRepository interface {
@@ -29,7 +30,7 @@ type (
 	}
 
 	TransactionUseCase interface {
-		Create(transactionInput *TransactionInput, idempotency string) (Transaction, error)
+		Create(transactionInput *TransactionInput) (Transaction, error)
 	}
 
 	TransactionHandler interface {
