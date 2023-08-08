@@ -2,11 +2,11 @@ package usecase
 
 import (
 	"errors"
-	"time"
 
 	"github.com/shopspring/decimal"
 	"github.com/sirupsen/logrus"
 	"github.com/viniciusarambul/transaction/src/entity"
+	"github.com/viniciusarambul/transaction/src/pkg"
 )
 
 type TransactionUseCase struct {
@@ -14,14 +14,16 @@ type TransactionUseCase struct {
 	operationRepository    entity.OperationRepository
 	accountRepository      entity.AccountRepository
 	log                    *logrus.Logger
+	clock                  pkg.Clock
 }
 
-func NewTransactionUseCase(transactionRepository entity.TransactionRepository, operationRepository entity.OperationRepository, accountRepository entity.AccountRepository, log *logrus.Logger) entity.TransactionUseCase {
+func NewTransactionUseCase(transactionRepository entity.TransactionRepository, operationRepository entity.OperationRepository, accountRepository entity.AccountRepository, log *logrus.Logger, clock pkg.Clock) entity.TransactionUseCase {
 	return &TransactionUseCase{
 		transactiontRepository: transactionRepository,
 		operationRepository:    operationRepository,
 		accountRepository:      accountRepository,
 		log:                    log,
+		clock:                  clock,
 	}
 }
 
@@ -34,7 +36,7 @@ func (transactionUseCase *TransactionUseCase) Create(transactionInput *entity.Tr
 		AccountId:       transactionInput.AccountId,
 		OperationTypeId: transactionInput.OperationTypeId,
 		Amount:          transactionInput.Amount,
-		EventDate:       time.Now().Local().UTC(),
+		EventDate:       transactionUseCase.clock.Now(),
 	}
 
 	transaction, err := transactionUseCase.verifyOperationCondition(&transactionBeforeVerify)
