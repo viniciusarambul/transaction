@@ -12,6 +12,7 @@ import (
 	"github.com/viniciusarambul/transaction/src/api/presenter"
 	"github.com/viniciusarambul/transaction/src/infra"
 	"github.com/viniciusarambul/transaction/src/infra/repository"
+	"github.com/viniciusarambul/transaction/src/pkg"
 	"github.com/viniciusarambul/transaction/src/usecase"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
 
@@ -56,9 +57,10 @@ func main() {
 
 	handler.NewAccountHandler(engine, accountUseCase)
 
+	clock := pkg.New()
 	transactionRepository := repository.NewTransactionRepository(db)
 	operationRepository := repository.NewOperationRepository(db)
-	transactionUseCase := usecase.NewTransactionUseCase(transactionRepository, operationRepository, accountRepository, log)
+	transactionUseCase := usecase.NewTransactionUseCase(transactionRepository, operationRepository, accountRepository, log, clock)
 
 	handler.NewTransactionHandler(engine, transactionUseCase)
 

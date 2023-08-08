@@ -16,6 +16,8 @@ type (
 		OperationTypeId int
 		Amount          decimal.Decimal
 		EventDate       time.Time
+		CreatedAt       time.Time
+		UpdatedAt       time.Time
 	}
 
 	TransactionInput struct {
@@ -23,6 +25,8 @@ type (
 		OperationTypeId int             `json:"operation_type_id"`
 		Amount          decimal.Decimal `json:"amount"`
 		IdempotencyKey  string          `json:"idempotency_key"`
+		CreatedAt       time.Time       `json:"created_at"`
+		UpdatedAt       time.Time       `json:"updated_at"`
 	}
 
 	TransactionRepository interface {
