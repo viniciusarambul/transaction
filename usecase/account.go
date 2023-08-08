@@ -5,7 +5,7 @@ import (
 
 	"github.com/shopspring/decimal"
 	"github.com/sirupsen/logrus"
-	"github.com/viniciusarambul/transaction/src/entity"
+	"github.com/viniciusarambul/transaction/entity"
 )
 
 type AccountUseCase struct {

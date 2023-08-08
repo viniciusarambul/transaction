@@ -5,8 +5,8 @@ import (
 
 	"github.com/shopspring/decimal"
 	"github.com/sirupsen/logrus"
-	"github.com/viniciusarambul/transaction/src/entity"
-	"github.com/viniciusarambul/transaction/src/pkg"
+	"github.com/viniciusarambul/transaction/entity"
+	"github.com/viniciusarambul/transaction/utils"
 )
 
 type TransactionUseCase struct {
@@ -14,10 +14,10 @@ type TransactionUseCase struct {
 	operationRepository    entity.OperationRepository
 	accountRepository      entity.AccountRepository
 	log                    *logrus.Logger
-	clock                  pkg.Clock
+	clock                  utils.Clock
 }
 
-func NewTransactionUseCase(transactionRepository entity.TransactionRepository, operationRepository entity.OperationRepository, accountRepository entity.AccountRepository, log *logrus.Logger, clock pkg.Clock) entity.TransactionUseCase {
+func NewTransactionUseCase(transactionRepository entity.TransactionRepository, operationRepository entity.OperationRepository, accountRepository entity.AccountRepository, log *logrus.Logger, clock utils.Clock) entity.TransactionUseCase {
 	return &TransactionUseCase{
 		transactiontRepository: transactionRepository,
 		operationRepository:    operationRepository,

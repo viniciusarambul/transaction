@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/viniciusarambul/transaction/src/entity"
+	"github.com/viniciusarambul/transaction/entity"
 )
 
 type AccountHandler struct {

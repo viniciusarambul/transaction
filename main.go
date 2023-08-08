@@ -8,12 +8,13 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/viniciusarambul/transaction/src/api/handler"
-	"github.com/viniciusarambul/transaction/src/api/presenter"
-	"github.com/viniciusarambul/transaction/src/infra"
-	"github.com/viniciusarambul/transaction/src/infra/repository"
-	"github.com/viniciusarambul/transaction/src/pkg"
-	"github.com/viniciusarambul/transaction/src/usecase"
+	"github.com/viniciusarambul/transaction/db"
+	"github.com/viniciusarambul/transaction/handler"
+	"github.com/viniciusarambul/transaction/log"
+	"github.com/viniciusarambul/transaction/presenter"
+	"github.com/viniciusarambul/transaction/repository"
+	"github.com/viniciusarambul/transaction/usecase"
+	"github.com/viniciusarambul/transaction/utils"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
 
 	"github.com/uptrace/opentelemetry-go-extra/otelplay"
@@ -38,12 +39,12 @@ func main() {
 
 	})
 
-	log, err := infra.InitLogger()
+	log, err := log.InitLogger()
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	db, err := infra.SetupDB()
+	db, err := db.SetupDB()
 	if err != nil {
 		fmt.Println(err)
 		panic("errou")
@@ -57,7 +58,7 @@ func main() {
 
 	handler.NewAccountHandler(engine, accountUseCase)
 
-	clock := pkg.New()
+	clock := utils.New()
 	transactionRepository := repository.NewTransactionRepository(db)
 	operationRepository := repository.NewOperationRepository(db)
 	transactionUseCase := usecase.NewTransactionUseCase(transactionRepository, operationRepository, accountRepository, log, clock)

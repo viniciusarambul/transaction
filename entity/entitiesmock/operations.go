@@ -8,7 +8,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	entity "github.com/viniciusarambul/transaction/src/entity"
+	entity "github.com/viniciusarambul/transaction/entity"
 )
 
 // MockOperationRepository is a mock of OperationRepository interface.

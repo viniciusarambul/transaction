@@ -1,8 +1,9 @@
-package infra
+package db
 
 import (
 	"fmt"
 
+	"github.com/viniciusarambul/transaction/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	gormLogger "gorm.io/gorm/logger"
@@ -10,7 +11,7 @@ import (
 )
 
 func SetupDB() (*gorm.DB, error) {
-	cfg := LoadEnvVars()
+	cfg := config.LoadEnvVars()
 
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
 		cfg.DatabaseHost, cfg.DatabaseUsername, cfg.DatabasePassword, cfg.DatabaseName, cfg.DatabasePort)

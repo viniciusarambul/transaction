@@ -9,7 +9,7 @@ import (
 
 	gin "github.com/gin-gonic/gin"
 	gomock "github.com/golang/mock/gomock"
-	entity "github.com/viniciusarambul/transaction/src/entity"
+	entity "github.com/viniciusarambul/transaction/entity"
 )
 
 // MockTransactionRepository is a mock of TransactionRepository interface.

@@ -1,6 +1,6 @@
 package presenter
 
-import "github.com/viniciusarambul/transaction/src/entity"
+import "github.com/viniciusarambul/transaction/entity"
 
 type accountPresenter struct{}
 

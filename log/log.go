@@ -1,14 +1,15 @@
-package infra
+package log
 
 import (
 	"os"
 
 	"github.com/sirupsen/logrus"
 	"github.com/uptrace/opentelemetry-go-extra/otellogrus"
+	"github.com/viniciusarambul/transaction/config"
 )
 
 func InitLogger() (*logrus.Logger, error) {
-	cfg := LoadEnvVars()
+	cfg := config.LoadEnvVars()
 	log := logrus.New()
 
 	log.SetOutput(os.Stdout)

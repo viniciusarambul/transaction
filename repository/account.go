@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/viniciusarambul/transaction/src/entity"
+	"github.com/viniciusarambul/transaction/entity"
 	"gorm.io/gorm"
 )
 

@@ -9,10 +9,10 @@ import (
 	"github.com/shopspring/decimal"
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
-	"github.com/viniciusarambul/transaction/src/entity"
-	mock_entity "github.com/viniciusarambul/transaction/src/entity/entitiesmock"
-	mock_pkg "github.com/viniciusarambul/transaction/src/pkg/pkgmock"
-	"github.com/viniciusarambul/transaction/src/usecase"
+	"github.com/viniciusarambul/transaction/entity"
+	mock_entity "github.com/viniciusarambul/transaction/entity/entitiesmock"
+	"github.com/viniciusarambul/transaction/usecase"
+	mock_utils "github.com/viniciusarambul/transaction/utils/utilsmock"
 )
 
 func Test_TransactionUseCaseMethodCreate(t *testing.T) {
@@ -22,7 +22,7 @@ func Test_TransactionUseCaseMethodCreate(t *testing.T) {
 		accountRepository := mock_entity.NewMockAccountRepository(ctrl)
 		transactionRepository := mock_entity.NewMockTransactionRepository(ctrl)
 		operationRepository := mock_entity.NewMockOperationRepository(ctrl)
-		clock := mock_pkg.NewMockClock(ctrl)
+		clock := mock_utils.NewMockClock(ctrl)
 		log := logrus.New()
 
 		clock.EXPECT().Now().Return(now)
@@ -75,7 +75,7 @@ func Test_TransactionUseCaseMethodCreate(t *testing.T) {
 		accountRepository := mock_entity.NewMockAccountRepository(ctrl)
 		transactionRepository := mock_entity.NewMockTransactionRepository(ctrl)
 		operationRepository := mock_entity.NewMockOperationRepository(ctrl)
-		clock := mock_pkg.NewMockClock(ctrl)
+		clock := mock_utils.NewMockClock(ctrl)
 		log := logrus.New()
 
 		clock.EXPECT().Now().Return(now)
@@ -111,7 +111,7 @@ func Test_TransactionUseCaseMethodCreate(t *testing.T) {
 		accountRepository := mock_entity.NewMockAccountRepository(ctrl)
 		transactionRepository := mock_entity.NewMockTransactionRepository(ctrl)
 		operationRepository := mock_entity.NewMockOperationRepository(ctrl)
-		clock := mock_pkg.NewMockClock(ctrl)
+		clock := mock_utils.NewMockClock(ctrl)
 		log := logrus.New()
 
 		clock.EXPECT().Now().Return(now)
@@ -158,7 +158,7 @@ func Test_TransactionUseCaseMethodCreate(t *testing.T) {
 		accountRepository := mock_entity.NewMockAccountRepository(ctrl)
 		transactionRepository := mock_entity.NewMockTransactionRepository(ctrl)
 		operationRepository := mock_entity.NewMockOperationRepository(ctrl)
-		clock := mock_pkg.NewMockClock(ctrl)
+		clock := mock_utils.NewMockClock(ctrl)
 		log := logrus.New()
 
 		clock.EXPECT().Now().Return(now)
@@ -210,7 +210,7 @@ func Test_TransactionUseCaseMethodCreate(t *testing.T) {
 		accountRepository := mock_entity.NewMockAccountRepository(ctrl)
 		transactionRepository := mock_entity.NewMockTransactionRepository(ctrl)
 		operationRepository := mock_entity.NewMockOperationRepository(ctrl)
-		clock := mock_pkg.NewMockClock(ctrl)
+		clock := mock_utils.NewMockClock(ctrl)
 		log := logrus.New()
 
 		clock.EXPECT().Now().Return(now)
@@ -262,7 +262,7 @@ func Test_TransactionUseCaseMethodCreate(t *testing.T) {
 		accountRepository := mock_entity.NewMockAccountRepository(ctrl)
 		transactionRepository := mock_entity.NewMockTransactionRepository(ctrl)
 		operationRepository := mock_entity.NewMockOperationRepository(ctrl)
-		clock := mock_pkg.NewMockClock(ctrl)
+		clock := mock_utils.NewMockClock(ctrl)
 		log := logrus.New()
 
 		clock.EXPECT().Now().Return(now)

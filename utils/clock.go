@@ -1,5 +1,5 @@
-//go:generate go run github.com/golang/mock/mockgen@v1.6.0 -source=clock.go -destination=pkgmock/clock.go .
-package pkg
+//go:generate go run github.com/golang/mock/mockgen@v1.6.0 -source=clock.go -destination=utilsmock/clock.go .
+package utils
 
 import "time"
 

@@ -8,9 +8,9 @@ import (
 	"github.com/shopspring/decimal"
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
-	"github.com/viniciusarambul/transaction/src/entity"
-	mock_entity "github.com/viniciusarambul/transaction/src/entity/entitiesmock"
-	"github.com/viniciusarambul/transaction/src/usecase"
+	"github.com/viniciusarambul/transaction/entity"
+	mock_entity "github.com/viniciusarambul/transaction/entity/entitiesmock"
+	"github.com/viniciusarambul/transaction/usecase"
 )
 
 func Test_AccountUseCaseMethodCreate(t *testing.T) {

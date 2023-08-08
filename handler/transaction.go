@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/viniciusarambul/transaction/src/entity"
+	"github.com/viniciusarambul/transaction/entity"
 )
 
 type TransactionHandler struct {
