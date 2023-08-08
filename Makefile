@@ -12,3 +12,9 @@ run-api:
 
 flyway:
 	@docker-compose up flyway
+
+test.cover:
+	@go test ./... -coverprofile=cover.out
+	@go tool cover -html=cover -o cover.html
+	@open cover.html
+	

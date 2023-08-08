@@ -2,7 +2,6 @@ package usecase
 
 import (
 	"errors"
-	"time"
 
 	"github.com/shopspring/decimal"
 	"github.com/sirupsen/logrus"
@@ -27,10 +26,8 @@ func (accountUseCase *AccountUseCase) Create(accountInput entity.AccountInput) (
 	accountUseCase.log.Info("Start method Create on AccountUseCase")
 
 	account := entity.Account{
-		Document:  accountInput.Document,
-		LimitMax:  accountInput.LimitMax,
-		CreatedAt: time.Now().Local().UTC(),
-		UpdatedAt: time.Now().Local().UTC(),
+		Document: accountInput.Document,
+		LimitMax: accountInput.LimitMax,
 	}
 
 	if account.LimitMax.LessThan(decimal.Zero) {

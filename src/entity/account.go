@@ -1,3 +1,4 @@
+//go:generate go run github.com/golang/mock/mockgen@v1.6.0 -source=account.go -destination=entitiesmock/account.go .
 package entity
 
 import (
@@ -21,7 +22,7 @@ type (
 	AccountInput struct {
 		Document  string          `json:"document"`
 		LimitMax  decimal.Decimal `json:"limit_max"`
-		CreateAt  time.Time       `json:"created_at"`
+		CreatedAt time.Time       `json:"created_at"`
 		UpdatedAt time.Time       `json:"updated_at"`
 	}
 
