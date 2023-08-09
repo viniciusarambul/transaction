@@ -22,7 +22,7 @@ make flyway
 # up API on default port 8080
 make run-api
 
-# up API on default port 8080
+# run coverage test
 make test.cover
 ```
 
