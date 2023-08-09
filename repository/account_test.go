@@ -26,7 +26,6 @@ func TestAccount_Create(t *testing.T) {
 			UpdatedAt: time.Now(),
 		}
 		mockDb.ExpectBegin()
-		//query := `INSERT INTO "accounts" ("document","limit_max","created_at","updated_at","id") VALUES ($1,$2,$3,$4,$5) RETURNING "id"`
 
 		mockDb.ExpectQuery(`INSERT INTO "accounts" (.+) RETURNING`).
 			WithArgs(acc.Document, acc.LimitMax, acc.CreatedAt, acc.UpdatedAt, acc.ID).
