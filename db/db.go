@@ -6,7 +6,7 @@ import (
 	"github.com/viniciusarambul/transaction/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	gormLogger "gorm.io/gorm/logger"
+	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
 )
 
@@ -17,7 +17,8 @@ func SetupDB() (*gorm.DB, error) {
 		cfg.DatabaseHost, cfg.DatabaseUsername, cfg.DatabasePassword, cfg.DatabaseName, cfg.DatabasePort)
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
-		Logger: gormLogger.Discard,
+		Logger:                 logger.Default.LogMode(logger.Info),
+		SkipDefaultTransaction: true,
 		NamingStrategy: schema.NamingStrategy{
 			TablePrefix:   fmt.Sprintf("%s.", cfg.DatabaseSchema),
 			SingularTable: false,
