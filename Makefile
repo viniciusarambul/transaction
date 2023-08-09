@@ -2,7 +2,7 @@ include .env
 export
 
 build:
-	@go build -tags $(run_cmd) -o ./bin/ms-transaction src/api/
+	@go build
 
 infra.up:
 	@docker-compose up -d --remove-orphans postgres
@@ -14,7 +14,7 @@ flyway:
 	@docker-compose up flyway
 
 test.cover:
-	@go test ./... -coverprofile=cover.out
-	@go tool cover -html=cover -o cover.html
+	@go test ./... -coverprofile=cover.txt
+	@go tool cover -html=cover.txt -o cover.html
 	@open cover.html
 	
